@@ -1,0 +1,60 @@
+﻿@model List<WebApplication2.Models.GradesStudent_VM>
+
+@{
+    ViewBag.Title = "Not Girişi";
+}
+
+<div class="container mt-5">
+    @* Sayfa başlığında listenin ilk elemanından öğrenci adını alıyoruz *@
+    <h3 class="mb-4">
+        <i class="bi bi-person-badge me-2"></i>
+        @* Parantez ekleyerek Razor'a bunun bir C# kodu olduğunu söylüyoruz *@
+        @((Model.FirstOrDefault() != null) ? Model.FirstOrDefault().FirstName + " " + Model.FirstOrDefault().LastName : "Öğrenci") - Not Giriş Paneli
+    </h3>
+    @using (Html.BeginForm("ManageGrades", "Admin", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="table-responsive">
+            <table class="table table-hover border shadow-sm">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Ders Adı</th>
+                        <th width="150">Vize</th>
+                        <th width="150">Final</th>
+                        <th width="120">Ortalama</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
+                        <tr>
+                            <td>
+                                @* Ders adını gösteriyoruz *@
+                                <span class="fw-bold">@Model[i].Name</span>
+
+                                @* Geri dönüşte (POST) hangi kaydın güncelleneceğini bilmek için ID'leri gizliyoruz *@
+                                @Html.HiddenFor(m => m[i].EnrollmentId)
+                                @Html.HiddenFor(m => m[i].StudentId)
+                            </td>
+                            <td>
+                                @Html.TextBoxFor(m => m[i].Midterm, new { @class = "form-control", type = "number", step = "0.01", min = "0", max = "100" })
+                            </td>
+                            <td>
+                                @Html.TextBoxFor(m => m[i].Final, new { @class = "form-control", type = "number", step = "0.01", min = "0", max = "100" })
+                            </td>
+                            <td class="align-middle text-center">
+                                <span class="badge bg-info text-dark fs-6">@Model[i].Average</span>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="d-flex justify-content-end gap-2 mt-3">
+            <a href="@Url.Action("HomeAdmin", "Home")" class="btn btn-secondary">İptal</a>
+            <button type="submit" class="btn btn-success px-4">Tüm Notları Kaydet</button>
+        </div>
+     }
+</div>

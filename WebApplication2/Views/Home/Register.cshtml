@@ -1,0 +1,82 @@
+﻿@model WebApplication2.Models.Students
+@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    ViewBag.Title = "Register";
+}
+
+<div class="container">
+    <!-- İçeriği ekranın ortasına hizalar -->
+    <div class="row justify-content-center align-items-center" style="min-height: 85vh;">
+        <div class="col-md-5 col-lg-4">
+            <div class="card shadow border-0 rounded-3">
+                <div class="card-header bg-dark text-white text-center py-3">
+                    <h5 class="mb-0 fw-bold">Öğrenci Kayıt Paneli</h5>
+                </div>
+                <div class="card-body p-4">
+
+                    @if (ViewBag.Error != null)
+                    {
+                        <div class="alert alert-danger p-2 small text-center shadow-sm">
+                            <i class="bi bi-exclamation-triangle-fill me-1"></i> @ViewBag.Error
+                        </div>
+                    }
+
+                    @using (Html.BeginForm("Register", "Home", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <!-- İsim -->
+                        <div class="mb-3">
+                            @Html.LabelFor(m => m.FirstName, "İSİM", new { @class = "form-label fw-semibold small text-secondary" })
+                            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control form-control-lg fs-6", placeholder = "Adınızı giriniz", required = "required" })
+                        </div>
+
+                        <!-- Soyisim -->
+                        <div class="mb-3">
+                            @Html.LabelFor(m => m.LastName, "SOYİSİM", new { @class = "form-label fw-semibold small text-secondary" })
+                            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control form-control-lg fs-6", placeholder = "Soyadınızı giriniz", required = "required" })
+                        </div>
+
+                        <!-- Öğrenci Numarası -->
+                        <div class="mb-3">
+                            @Html.LabelFor(m => m.StudentNo, "ÖĞRENCİ NUMARASI", new { @class = "form-label fw-semibold small text-secondary" })
+                            @Html.TextBoxFor(m => m.StudentNo, new { @class = "form-control form-control-lg fs-6", type = "number", placeholder = "Örn: 2024105", required = "required" })
+                        </div>
+
+                        <!-- E-posta -->
+                        <div class="mb-3">
+                            @Html.LabelFor(m => m.Email, "E-POSTA", new { @class = "form-label fw-semibold small text-secondary" })
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control form-control-lg fs-6", type = "email", placeholder = "eposta@adresiniz.com", required = "required" })
+                        </div>
+
+                        <!-- Şifre -->
+                        <div class="mb-4">
+                            @Html.LabelFor(m => m.Password, "ŞİFRE", new { @class = "form-label fw-semibold small text-secondary" })
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control form-control-lg fs-6", placeholder = "••••••••", required = "required" })
+                        </div>
+
+                        <!-- Dönem -->
+                        <div class="mb-4">
+                            @Html.LabelFor(m => m.StdSemester, "DÖNEM", new { @class = "form-label fw-semibold small text-secondary" })
+                            @Html.PasswordFor(m => m.StdSemester, new { @class = "form-control form-control-lg fs-6", type = "number", placeholder = "1.", required = "required" })
+                        </div>
+
+                        <!-- Kayıt Butonu -->
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-dark btn-lg fw-bold shadow-sm py-2 fs-6">Kaydı Tamamla</button>
+
+
+                        </div>
+
+                        <div class="text-center mt-3">
+                            <small class="text-muted">
+                                Hesabınız var mı?
+                                <a href="@Url.Action("LoginUser", "Home")" class="text-decoration-none fw-bold text-dark border-bottom border-dark">Giriş Yap</a>
+                            </small>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

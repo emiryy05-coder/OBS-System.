@@ -1,0 +1,59 @@
+﻿@model WebApplication2.Models.CourseEnrollment_VM
+@{
+    ViewBag.Title = "EditStudent";
+}
+
+<div class="container">
+    <!-- İçeriği ekranın ortasına hizalar -->
+    <div class="row justify-content-center align-items-center" style="min-height: 85vh;">
+        <div class="col-md-5 col-lg-4">
+            <div class="card shadow border-0 rounded-3">
+                <div class="card-header bg-dark text-white text-center py-3">
+                    <h5 class="mb-0 fw-bold">Öğrenci Düzenleme Paneli</h5>
+                </div>
+                <div class="card-body p-4">
+                    @using (Html.BeginForm("EditCourse", "Admin", FormMethod.Post))
+
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(m => m.CourseID)
+
+                        <div class="mb-3">
+                            @Html.LabelFor(x => x.Code, "Ders Kodu")
+                            @Html.TextBoxFor(x => x.Code, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Code, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="mb-3">
+                            @Html.LabelFor(x => x.Name, "Ders Adı")
+                            @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Name, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="mb-3">
+                            @Html.LabelFor(x => x.Credit, "Kredi")
+                            @Html.TextBoxFor(x => x.Credit, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Credit, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="mb-3">
+                            @Html.LabelFor(x => x.Semester, "Ders Dönemi")
+                            @Html.TextBoxFor(x => x.Semester, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Semester, "", new { @class = "text-danger" })
+                        </div>
+
+
+
+                        <!-- Kayıt Butonu -->
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-dark btn-lg fw-bold shadow-sm py-2 fs-6">Düzenlemeyi Tamamla</button>
+                        </div>
+
+
+                     }
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

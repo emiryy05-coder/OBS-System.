@@ -1,0 +1,32 @@
+﻿@model WebApplication2.Models.Students
+
+<h2>Öğrenciyi Sil</h2>
+<h3>Bu öğrenciyi silmek istediğinize emin misiniz?</h3>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Adı:</dt>
+        <dd>@Model.FirstName</dd>
+        <dt>Soyadı:</dt>
+        <dd>@Model.LastName</dd>
+        <dt>Numarası:</dt>
+        <dd>@Model.StudentNo</dd>
+    </dl>
+
+    @using (Html.BeginForm("DeleteStudent"))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.StudentId) @* Veritabanı anahtarın hangisiyse *@
+        <input type="submit" value="Evet, Sil" class="btn btn-danger" />
+        @Html.ActionLink("İptal", "HomeAdmin", null, new { @class = "btn btn-default" }
+        
+        )
+    }
+</div>
+@{
+    ViewBag.Title = "DeleteStudent";
+}
+
+<h2>DeleteStudent</h2>
+

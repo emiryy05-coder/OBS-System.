@@ -1,0 +1,60 @@
+﻿@model WebApplication2.Models.Students
+
+@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    ViewBag.Title = "Giriş Yap";
+}
+
+
+
+
+<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+
+    <div style="width: 100%; max-width: 400px; padding: 20px; border: 1px solid #ddd; border-radius: 10px; background-color: #f9f9f9;">
+
+        <h2 class="text-center">Yetkili Giriş</h2>
+
+        @using (Html.BeginForm("LoginAdmin", "Home", FormMethod.Post))
+        {
+            @* Admin yetkisi olmayan öğrenciler için hata mesajı *@
+            if (ViewBag.Error != null)
+            {
+                <div class="alert alert-warning text-center">
+                    <strong>Uyarı:</strong> @ViewBag.Error
+                </div>
+            }
+            if(ViewBag.Mesaj != null)
+            {
+                  <div class="alert alert-danger text-center">
+                    <strong>Uyarı:</strong> @ViewBag.Mesaj
+                    </div>
+            
+            }
+
+        @Html.AntiForgeryToken()
+
+        <div class="form-vertical justify-content-center text-center ">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group mb-3 d-flex flex-column align-items-center">
+                @Html.LabelFor(m => m.FirstName, "Yetkili Adı", new { @class = "control-label d-block text-center" })
+                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control d-block text-center" })
+                @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group mb-3 d-flex flex-column align-items-center">
+                @Html.LabelFor(m => m.Password, "Yetkili Şifresi", new { @class = "control-label d-block text-center" })
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control d-block text-center" })
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group d-flex flex-column align-items-center " style="margin-top:20px;">
+                <button type="submit" class="btn btn-primary">Giriş Yap</button>
+            </div>
+        </div>
+    }
+    </div>
+</div>
+
+

@@ -1,0 +1,38 @@
+﻿@model WebApplication2.Models.Students
+@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    ViewBag.Title = "Giriş Paneli";
+}
+
+<div class="container d-flex align-items-center justify-content-center" style="min-height: 80vh;">
+    <div class="card shadow-lg border-0" style="max-width: 500px; width: 100%; border-radius: 15px;">
+        <div class="card-body p-5 text-center">
+
+            <!-- Logo veya İkon Alanı -->
+            <div class="mb-4">
+                <i class="bi bi-mortarboard-fill text-primary" style="font-size: 4rem;"></i>
+            </div>
+
+            <h2 class="fw-bold mb-2">Öğrenci Bilgi Sistemi</h2>
+            <p class="text-muted mb-5">Devam etmek için lütfen giriş türünüzü seçiniz.</p>
+
+            <div class="d-grid gap-3">
+                <!-- Öğrenci Girişi Butonu -->
+                <a href="@Url.Action("LoginUser", "Home")" class="btn btn-primary btn-lg d-flex align-items-center justify-content-center py-3 shadow-sm" style="border-radius: 10px;">
+                    <i class="bi bi-person-badge me-2"></i>
+                    <span class="fw-semibold">Öğrenci Girişi</span>
+                </a>
+
+                <!-- Yetkili Girişi Butonu -->
+                <a href="@Url.Action("LoginAdmin", "Home")" class="btn btn-dark btn-lg d-flex align-items-center justify-content-center py-3 shadow-sm" style="border-radius: 10px;">
+                    <i class="bi bi-shield-lock me-2"></i>
+                    <span class="fw-semibold">Yetkili Girişi</span>
+                </a>
+            </div>
+
+            <div class="mt-5">
+                <small class="text-muted text-uppercase fw-bold" style="letter-spacing: 1px;">HOŞ GELDİNİZ</small>
+            </div>
+        </div>
+    </div>
+</div>

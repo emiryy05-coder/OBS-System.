@@ -1,0 +1,288 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DB1_EFModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Courses">
+          <Key>
+            <PropertyRef Name="CourseID" />
+          </Key>
+          <Property Name="CourseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Credit" Type="int" Nullable="false" />
+          <Property Name="Semester" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Enrollments">
+          <Key>
+            <PropertyRef Name="EnrollmentId" />
+          </Key>
+          <Property Name="EnrollmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="CourseID" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Grades">
+          <Key>
+            <PropertyRef Name="GradesId" />
+          </Key>
+          <Property Name="GradesId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EnrollmentId" Type="int" Nullable="false" />
+          <Property Name="Midterm" Type="float" Nullable="false" />
+          <Property Name="Final" Type="float" Nullable="false" />
+          <Property Name="Average" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Students">
+          <Key>
+            <PropertyRef Name="StudentId" />
+          </Key>
+          <Property Name="StudentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudentNo" Type="bigint" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="StdSemester" Type="int" />
+        </EntityType>
+        <Association Name="FK_Enrollments_ToTable">
+          <End Role="Students" Type="Self.Students" Multiplicity="1" />
+          <End Role="Enrollments" Type="Self.Enrollments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="StudentId" />
+            </Principal>
+            <Dependent Role="Enrollments">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Enrollments_ToTable_1">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="1" />
+          <End Role="Enrollments" Type="Self.Enrollments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="Enrollments">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Grades_ToTable">
+          <End Role="Enrollments" Type="Self.Enrollments" Multiplicity="1" />
+          <End Role="Grades" Type="Self.Grades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Enrollments">
+              <PropertyRef Name="EnrollmentId" />
+            </Principal>
+            <Dependent Role="Grades">
+              <PropertyRef Name="EnrollmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB1_EFModelStoreContainer">
+          <EntitySet Name="Courses" EntityType="Self.Courses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Enrollments" EntityType="Self.Enrollments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Grades" EntityType="Self.Grades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Enrollments_ToTable" Association="Self.FK_Enrollments_ToTable">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Enrollments" EntitySet="Enrollments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Enrollments_ToTable_1" Association="Self.FK_Enrollments_ToTable_1">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="Enrollments" EntitySet="Enrollments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grades_ToTable" Association="Self.FK_Grades_ToTable">
+            <End Role="Enrollments" EntitySet="Enrollments" />
+            <End Role="Grades" EntitySet="Grades" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB1_EFModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Grades">
+          <Key>
+            <PropertyRef Name="GradesId" />
+          </Key>
+          <Property Name="GradesId" Type="Int32" Nullable="false" />
+          <Property Name="EnrollmentId" Type="Int32" Nullable="false" />
+          <Property Name="Midterm" Type="Double" Nullable="false" />
+          <Property Name="Final" Type="Double" Nullable="false" />
+          <Property Name="Average" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Enrollments" Relationship="DB1_EFModel.FK_Grades_ToTable" FromRole="Grades" ToRole="Enrollments" />
+        </EntityType>
+        <EntityContainer Name="Database1EF" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Grades" EntityType="Self.Grades" />
+          <EntitySet Name="Enrollments" EntityType="DB1_EFModel.Enrollments" />
+          <AssociationSet Name="FK_Grades_ToTable" Association="DB1_EFModel.FK_Grades_ToTable">
+            <End Role="Enrollments" EntitySet="Enrollments" />
+            <End Role="Grades" EntitySet="Grades" />
+          </AssociationSet>
+          <EntitySet Name="Courses" EntityType="DB1_EFModel.Courses" />
+          <AssociationSet Name="FK_Enrollments_ToTable_1" Association="DB1_EFModel.FK_Enrollments_ToTable_1">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="Enrollments" EntitySet="Enrollments" />
+          </AssociationSet>
+          <EntitySet Name="Students" EntityType="DB1_EFModel.Students" />
+          <AssociationSet Name="FK_Enrollments_ToTable" Association="DB1_EFModel.FK_Enrollments_ToTable">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Enrollments" EntitySet="Enrollments" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Enrollments">
+          <Key>
+            <PropertyRef Name="EnrollmentId" />
+          </Key>
+          <Property Name="EnrollmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <Property Name="CourseID" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="Grades" Relationship="DB1_EFModel.FK_Grades_ToTable" FromRole="Enrollments" ToRole="Grades" />
+          <NavigationProperty Name="Courses" Relationship="DB1_EFModel.FK_Enrollments_ToTable_1" FromRole="Enrollments" ToRole="Courses" />
+          <NavigationProperty Name="Students" Relationship="DB1_EFModel.FK_Enrollments_ToTable" FromRole="Enrollments" ToRole="Students" />
+        </EntityType>
+        <Association Name="FK_Grades_ToTable">
+          <End Type="DB1_EFModel.Enrollments" Role="Enrollments" Multiplicity="1" />
+          <End Type="DB1_EFModel.Grades" Role="Grades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Enrollments">
+              <PropertyRef Name="EnrollmentId" />
+            </Principal>
+            <Dependent Role="Grades">
+              <PropertyRef Name="EnrollmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Courses">
+          <Key>
+            <PropertyRef Name="CourseID" />
+          </Key>
+          <Property Name="CourseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Credit" Type="Int32" Nullable="false" />
+          <Property Name="Semester" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Enrollments" Relationship="DB1_EFModel.FK_Enrollments_ToTable_1" FromRole="Courses" ToRole="Enrollments" />
+        </EntityType>
+        <Association Name="FK_Enrollments_ToTable_1">
+          <End Type="DB1_EFModel.Courses" Role="Courses" Multiplicity="1" />
+          <End Type="DB1_EFModel.Enrollments" Role="Enrollments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="Enrollments">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Students">
+          <Key>
+            <PropertyRef Name="StudentId" />
+          </Key>
+          <Property Name="StudentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentNo" Type="Int64" Nullable="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Enrollments" Relationship="DB1_EFModel.FK_Enrollments_ToTable" FromRole="Students" ToRole="Enrollments" />
+          <Property Name="StdSemester" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_Enrollments_ToTable">
+          <End Type="DB1_EFModel.Students" Role="Students" Multiplicity="1" />
+          <End Type="DB1_EFModel.Enrollments" Role="Enrollments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="StudentId" />
+            </Principal>
+            <Dependent Role="Enrollments">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB1_EFModelStoreContainer" CdmEntityContainer="Database1EF">
+          <EntitySetMapping Name="Grades">
+            <EntityTypeMapping TypeName="DB1_EFModel.Grades">
+              <MappingFragment StoreEntitySet="Grades">
+                <ScalarProperty Name="GradesId" ColumnName="GradesId" />
+                <ScalarProperty Name="EnrollmentId" ColumnName="EnrollmentId" />
+                <ScalarProperty Name="Midterm" ColumnName="Midterm" />
+                <ScalarProperty Name="Final" ColumnName="Final" />
+                <ScalarProperty Name="Average" ColumnName="Average" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Enrollments">
+            <EntityTypeMapping TypeName="DB1_EFModel.Enrollments">
+              <MappingFragment StoreEntitySet="Enrollments">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="EnrollmentId" ColumnName="EnrollmentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Courses">
+            <EntityTypeMapping TypeName="DB1_EFModel.Courses">
+              <MappingFragment StoreEntitySet="Courses">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Semester" ColumnName="Semester" />
+                <ScalarProperty Name="Credit" ColumnName="Credit" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="DB1_EFModel.Students">
+              <MappingFragment StoreEntitySet="Students">
+                <ScalarProperty Name="StdSemester" ColumnName="StdSemester" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="StudentNo" ColumnName="StudentNo" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,67 @@
+﻿@model WebApplication2.Models.Courses
+
+@{
+    ViewBag.Title = "Yeni Ders Ekle";
+}
+
+<div class="container mt-5">
+    <h2>Yeni Ders Ekle</h2>
+    <hr />
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.Error
+        </div>
+    }
+
+    @using (Html.BeginForm("CourseAdd", "Home", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group mb-3">
+                <label class="control-label col-md-2">Ders Kodu</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "form-control", placeholder = "Örn: MAT101" } })
+                    @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="control-label col-md-2">Ders Adı</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "Dersin tam adını giriniz" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="control-label col-md-2">Kredi</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Credit, new { htmlAttributes = new { @class = "form-control", type = "number" } })
+                    @Html.ValidationMessageFor(model => model.Credit, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="control-label col-md-2">Dönem</label>
+                <div class="col-md-10">
+                    @* Semester artık int olduğu için burada sayı girişi alıyoruz *@
+                    @Html.EditorFor(model => model.Semester, new { htmlAttributes = new { @class = "form-control", type = "number", min = "1", max = "8" } })
+                    @Html.ValidationMessageFor(model => model.Semester, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group mt-4">
+                <div class="col-md-offset-2 col-md-10">
+                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                    @Html.ActionLink("Listeye Dön", "Courses", "Home", null, new { @class = "btn btn-secondary" })
+                </div>
+            </div>
+        </div>
+     }
+</div>
+

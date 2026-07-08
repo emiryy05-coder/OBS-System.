@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - ASP.NET Uygulamam</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="@Url.Action("HomeUser", "Home")">
+                <i class="bi bi-mortarboard-fill me-2"></i>OBS 
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="adminNavbar">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="@Url.Action("HomeUser", "Home")">Dersler</a>
+                    </li>
+
+                    <!-- Öğrenci Yönetimi -->
+                    <li class="nav-item">
+                        <a class="nav-link active" href="@Url.Action("DersKayıt", "Home")">Ders Kayıt</a>
+
+                    </li>
+
+                    <!-- Transkript  -->
+                    <li class="nav-item">
+                        <a class="nav-link active" href="@Url.Action("Transcript", "Home")">Transkript</a>
+
+                    </li>
+                </ul>
+
+               
+                <!-- Sağ Taraf: Profil ve Çıkış -->
+                <ul class="navbar-nav ms-auto">
+                    @if (Session["FirstName"] != null)
+                    {
+                        <li class="nav-item me-3 ">
+                            <span class="text-white fw-semibold">
+                                <i class="bi bi-person-circle me-1"></i>
+                                @Session["FirstName"] @Session["LastName"]
+                            </span>
+                        </li>
+                    }
+
+
+                    <li class="nav-item">
+                        <a href="@Url.Action("Logout", "Home")" class="btn btn-primary">Çıkış Yap</a>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
