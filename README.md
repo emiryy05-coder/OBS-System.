@@ -78,3 +78,18 @@ Projeyi yerel bilgisayarınızda ayağa kaldırmak için aşağıdaki adımları
 ## Lisans
 
 Bu proje MIT Lisansı ile lisanslanmıştır. Daha fazla bilgi için LICENSE dosyasını inceleyebilirsiniz.
+
+...........
+PROJEDEN BİRKAÇ EKRAN GÖRÜNTÜSÜ
+
+<img width="1919" height="868" alt="image" src="https://github.com/user-attachments/assets/b3b81f5d-53f5-4519-ba05-2aa184e07693" />
+<img width="1919" height="867" alt="image" src="https://github.com/user-attachments/assets/66a232de-0c5f-4b1d-8b9e-af0df33ab53a" />
+<img width="1919" height="867" alt="image" src="https://github.com/user-attachments/assets/9e9397df-d085-4215-8b1d-fbfa3dfd17ce" />
+<img width="1919" height="872" alt="image" src="https://github.com/user-attachments/assets/309724f1-ac18-40d8-9a9b-15aa655d97ba" />
+<img width="1919" height="867" alt="image" src="https://github.com/user-attachments/assets/0bc0b9e0-32a6-4ded-ab71-f939e6100516" />
+<img width="1919" height="846" alt="image" src="https://github.com/user-attachments/assets/04e25974-b9d3-4161-9d91-9eaca45566a8" />
+<img width="1919" height="863" alt="image" src="https://github.com/user-attachments/assets/c7ba6f84-cae4-4104-898f-31c8a6681e1d" />
+<img width="1919" height="869" alt="image" src="https://github.com/user-attachments/assets/0e114603-6776-445f-8fda-38d6d75965fa" />
+
+
+
